@@ -3,22 +3,24 @@ var mysql = require('mysql');
 var DB = require('../db/db.js');
 
 function UserDataMaping(rowData){
-    var UserData = new Object({
-      id: rowData.id,
-      name: rowData.name,
-      sex: rowData.sex,
-      birthday: rowData.birthday,
-      created_at: rowData.created_at,
-      updated_at: rowData.updated_at
-    });
-    return UserData;
+  var UserData = new userModel(
+    rowData.id,
+    rowData.name,
+    rowData.sex,
+    rowData.birthday,
+    rowData.created_at,
+    rowData.updated_at
+  );
+  return UserData;
 }
 
-function userModel(id, name, sex, birthday) {
+function userModel(id, name, sex, birthday, created_at, updated_at) {
   this.id = id;
   this.name = name;
   this.sex = sex;
   this.birthday = birthday;
+  this.created_at = created_at;
+  this.updated_at = updated_at;
 }
 
 var User = {};
@@ -35,7 +37,7 @@ User.list = function(callback){
     });
 };
 
-//Unfinished
+/*Create a admin in db*/
 User.create = function(data, callback){
   data.birthday+= " 00:00:00";
   DB.query('INSERT INTO `users` SET ?;', data, function(err, rows) {
@@ -46,7 +48,7 @@ User.create = function(data, callback){
   });
 };
 
-//Unfinished
+/*Update a admin in db*/
 User.update = function(data, id, callback){
   data.birthday+= " 00:00:00";
   DB.query('UPDATE `users` SET ? WHERE id = ?;', [data, id], function(err, rows) {
@@ -57,7 +59,7 @@ User.update = function(data, id, callback){
   });
 };
 
-//Unfinished
+/*Delete a admin in db*/
 User.delete = function(id, callback){
   DB.query('DELETE FROM `users` WHERE id = ?;', id, function(err, rows) {
     if (err) {
@@ -67,9 +69,9 @@ User.delete = function(id, callback){
   });
 };
 
-//Unfinished
-User.get = function(data, callback) {
-  DB.query('SELECT FROM `users` WHERE id = :id;', data, function(err, rows) {
+/*Get a admin in db By id*/
+User.get = function(id, callback) {
+  DB.query('SELECT FROM `users` WHERE id = ?;', id, function(err, rows) {
     if (err) {
       console.log(err);
     }

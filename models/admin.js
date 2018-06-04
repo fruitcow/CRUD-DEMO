@@ -2,23 +2,23 @@ var mysql = require("mysql");
 var DB = require("../db/db.js");
 
 function adminDataMaping(rowData) {
-  var adminData = new Object({
-    id: rowData.id,
-    name: rowData.name,
-    password: rowData.password
-  });
+  var adminData = new adminModel(
+    rowData.id,
+    rowData.name,
+    rowData.password
+  );
   return adminData;
 }
 
-function adminModel(user) {
-  this.id = user.id;
-  this.name = user.name;
-  this.password = user.password;
+function adminModel(id, name, password) {
+  this.id = id;
+  this.name = name;
+  this.password = password;
 }
 
 var Admin = {};
 
-//Unfinished
+/*Create a admin in db*/
 Admin.create = function(data, callback) {
   var result = {};
   DB.query("INSERT INTO `admins` SET ?;", data, function(err, rows) {
@@ -30,7 +30,7 @@ Admin.create = function(data, callback) {
   });
 };
 
-//Unfinished
+/*Get a admin by name*/
 Admin.get = function(name, callback) {
   var result = {};
   DB.query("SELECT * FROM `admins` WHERE username = ?;", name, function(err, rows) {
