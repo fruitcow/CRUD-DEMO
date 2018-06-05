@@ -4,12 +4,12 @@ var mysql = require('mysql');
 // 建立資料庫連線池
 //------------------------
 var db  = mysql.createPool({
-    user: 'erty88860',
-    password: 'asdf7777',
-    host: 'db4free.net',
-    database: 'erty88860', 
+    user: 'root',
+    password: '1234',
+    host: '127.0.0.1',
+    database: 'demo', 
     waitForConnections : true, 
-    connectionLimit : 10     
+    connectionLimit : 10       
 });
 
 //----------------------------

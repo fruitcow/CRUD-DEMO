@@ -312,7 +312,6 @@
               .then((res) => {
                 if (res.status == 200) {
                   this.list = res.data.result
-                  console.log(this.userInfo);
                 } else {
                   this.$Message.error('failed To user list');
                 }
