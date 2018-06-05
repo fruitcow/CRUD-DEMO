@@ -22,7 +22,7 @@ router.post("/signup", function(req, res, next) {
       /* Insert a Admin Data To Db */
       if (err) {
         console.log(err);
-        return next(error);
+        return next(err);
       }
       console.log(adminData);
       req.session.adminData = adminData;
@@ -42,7 +42,7 @@ router.post("/login", function(req, res, next) {
   var result = Admin.get(data.username, function(err, adminData) {
     if (err) {
       console.log(err);
-      return next(error);
+      return next(err);
     }
     
     if (adminData.password != data.password) {

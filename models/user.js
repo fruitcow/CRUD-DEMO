@@ -39,7 +39,6 @@ User.list = function(callback){
 
 /*Create a admin in db*/
 User.create = function(data, callback){
-  data.birthday+= " 00:00:00";
   DB.query('INSERT INTO `users` SET ?;', data, function(err, rows) {
     if (err) {
       console.log(err);
@@ -50,7 +49,6 @@ User.create = function(data, callback){
 
 /*Update a admin in db*/
 User.update = function(data, id, callback){
-  data.birthday+= " 00:00:00";
   DB.query('UPDATE `users` SET ? WHERE id = ?;', [data, id], function(err, rows) {
     if (err) {
       console.log(err);
@@ -71,11 +69,11 @@ User.delete = function(id, callback){
 
 /*Get a admin in db By id*/
 User.get = function(id, callback) {
-  DB.query('SELECT FROM `users` WHERE id = ?;', id, function(err, rows) {
+  DB.query('SELECT * FROM `users` WHERE id = ?;', id, function(err, rows) {
     if (err) {
       console.log(err);
     }
-      callback(err,rows);
+      return callback(err,rows);
   });
 };
 
